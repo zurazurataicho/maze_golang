@@ -33,25 +33,25 @@ func New(w, h int) *Maze {
 	rand.Seed(time.Now().UnixNano())
 	m := new(Maze)
 	m.setSize(w, h)
-	m.allocMap(w, h)
+	m.allocMap()
 	return m
 }
 
-func (m *Maze) allocMap(w, h int) {
-	m.Map = make([][]int, w)
-	for x := 0; x < w; x += 1 {
-		m.Map[x] = make([]int, h)
+func (m *Maze) allocMap() {
+	m.Map = make([][]int, m.Width)
+	for x := 0; x < m.Width; x += 1 {
+		m.Map[x] = make([]int, m.Height)
 	}
 }
 
 func (m *Maze) setSize(w, h int) {
-	if w <= 0 {
-		m.Width = 1
+	if w < 5 {
+		m.Width = 5
 	} else {
 		m.Width = w
 	}
-	if h <= 0 {
-		m.Height = 1
+	if h < 5 {
+		m.Height = 5
 	} else {
 		m.Height = h
 	}
@@ -81,8 +81,8 @@ func (m *Maze) Print() {
 }
 
 func (m *Maze) Make() {
-	x := randOdd(m.Width)
-	y := randOdd(m.Height)
+	x := randOdd(m.Width - 4)
+	y := randOdd(m.Height - 4)
 	fmt.Printf("(%d, %d)\n", x, y)
 	m.makeMaze(x, y)
 }
