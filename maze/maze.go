@@ -81,8 +81,8 @@ func (m *Maze) Print() {
 }
 
 func (m *Maze) Make() {
-	x := randOdd(m.Width - 3)
-	y := randOdd(m.Height - 3)
+	x := randOdd(m.Width - 2)
+	y := randOdd(m.Height - 2)
 	fmt.Printf("(%d, %d)\n", x, y)
 	m.makeMaze(x, y)
 }
