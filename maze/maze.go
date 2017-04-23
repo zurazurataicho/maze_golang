@@ -88,7 +88,7 @@ func (m *Maze) Make() {
 }
 
 func randOdd(mod int) (r int) {
-	r = 2 + rand.Intn(mod)
+	r = 1 + rand.Intn(mod)
 	if r%2 == 0 {
 		r += 1
 	}
