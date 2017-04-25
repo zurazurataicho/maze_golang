@@ -5,6 +5,11 @@ import (
 	"time"
 )
 
+const (
+	axisX int = iota
+	axisY
+)
+
 type Vector struct {
 	current int
 	origin  int
@@ -34,7 +39,7 @@ func (v *Vector) Reset() {
 }
 
 func (v *Vector) GetVector() (int, int) {
-	return v.vec[v.current][0], v.vec[v.current][1]
+	return v.vec[v.current][axisX], v.vec[v.current][axisY]
 }
 
 func (v *Vector) Rotate() bool {
