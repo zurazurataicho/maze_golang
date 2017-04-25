@@ -1,6 +1,7 @@
 package maze
 
 import (
+	"../vector"
 	"fmt"
 	"math/rand"
 	"time"
@@ -10,18 +11,6 @@ const (
 	Road int = iota
 	Wall
 )
-
-type Vector struct {
-	x int
-	y int
-}
-
-var dir []Vector = []Vector{
-	{0, -1}, /** UP */
-	{0, 1},  /** DOWN */
-	{-1, 0}, /** LEFT */
-	{1, 0},  /** RIGHT */
-}
 
 type Maze struct {
 	Map    [][]int
@@ -99,25 +88,20 @@ func randOdd(mod int) (r int) {
 }
 
 func (m *Maze) makeMaze(x, y int) {
-	d := rand.Intn(4)
-	dd := d
+	v := vector.New()
 	for {
-		px := x + dir[d].x*2
-		py := y + dir[d].y*2
+		vx, vy := v.GetVector()
+		px := x + vx*2
+		py := y + vy*2
 		if px < 0 || px >= m.Width || py < 0 || py >= m.Height || m.Map[px][py] != Wall {
-			d += 1
-			if d == 4 {
-				d = 0
-			}
-			if d == dd {
+			if v.Rotate() {
 				return
 			}
 			continue
 		}
-		m.Map[x+dir[d].x][y+dir[d].y] = Road
+		m.Map[x+vx][y+vy] = Road
 		m.Map[px][py] = Road
 		m.makeMaze(px, py)
-		d = rand.Intn(4)
-		dd = d
+		v.Reset()
 	}
 }
