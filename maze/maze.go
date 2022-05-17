@@ -1,15 +1,21 @@
 package maze
 
 import (
-	"../vector"
 	"fmt"
 	"math/rand"
 	"time"
+
+	"zura.org/vector"
 )
 
 const (
 	Road int = iota
 	Wall
+)
+
+const (
+	axisX int = iota
+	axisY
 )
 
 type Maze struct {
@@ -63,6 +69,7 @@ func (m *Maze) Print() {
 			} else {
 				c = " "
 			}
+			time.Sleep(time.Millisecond * 20)
 			fmt.Printf("%s", c)
 		}
 		fmt.Println("")

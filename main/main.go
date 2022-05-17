@@ -1,6 +1,6 @@
 package main
 
-import "./maze"
+import "zura.org/maze"
 
 const (
 	width  int = 59
